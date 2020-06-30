@@ -238,20 +238,26 @@ NSNumber *mediaAspectRatio;
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     UIViewController *rootViewController = [keyWindow rootViewController];
     
+    NSArray *optionsArray;
+
+    
     GADNativeAdViewAdOptions *adViewOptions = [GADNativeAdViewAdOptions new];
     
     adViewOptions.preferredAdChoicesPosition = GADAdChoicesPositionTopRightCorner;
 
-    if (mediaAspectRatio isEqualToNumber:@0) {
-        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioAny;
-    } else if (mediaAspectRatio isEqualToNumber:@1) {
-        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioLandscape;
-    } else if (mediaAspectRatio isEqualToNumber:@2) {
-        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioPortrait;
-    } else if (mediaAspectRatio isEqualToNumber:@3) {
-        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioSquare;
+    GADNativeAdMediaAdLoaderOptions *aspectOptions = [GADNativeAdMediaAdLoaderOptions new];
+    
+    if ([mediaAspectRatio isEqualToNumber:@0]) {
+        aspectOptions.mediaAspectRatio = GADMediaAspectRatioAny;
+    } else if ([mediaAspectRatio isEqualToNumber:@1]) {
+        aspectOptions.mediaAspectRatio = GADMediaAspectRatioLandscape;
+    } else if ([mediaAspectRatio isEqualToNumber:@2]) {
+        aspectOptions.mediaAspectRatio = GADMediaAspectRatioPortrait;
+    } else if ([mediaAspectRatio isEqualToNumber:@3]) {
+        aspectOptions.mediaAspectRatio = GADMediaAspectRatioSquare;
     }
-
+    
+    optionsArray = [NSArray arrayWithObjects: adViewOptions, aspectOptions, nil];
     self.adLoader = [[GADAdLoader alloc]
                      initWithAdUnitID:adUnitId
                      rootViewController:rootViewController
