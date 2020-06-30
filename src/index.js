@@ -120,7 +120,8 @@ const NativeAdView = (props) => {
         style={props.style}
         onUnifiedNativeAdLoaded={_onUnifiedNativeAdLoaded}
         refreshInterval={props.refreshInterval? props.refreshInterval : 60000}
-        testDevices={props.testDevices? props.testDevices : []}
+        testDevices={props.testDevices ? props.testDevices : []}
+        adMediaAspectRatio={props.adMediaAspectRatio > -1 ? props.adMediaAspectRatio : 0}
         adUnitID={props.adUnitID}
       >
         {props.children}

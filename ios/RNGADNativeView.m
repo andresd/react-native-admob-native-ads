@@ -21,7 +21,7 @@ RCTBridge *bridge;
 NSString *adUnitId;
 NSNumber *refreshingInterval;
 NSNumber *delay;
-
+NSNumber *mediaAspectRatio;
 
 - (instancetype)initWithBridge:(RCTBridge *)_bridge
 {
@@ -31,6 +31,11 @@ NSNumber *delay;
         bridge = _bridge;
     }
     return self;
+}
+
+- (void)setAdMediaAspectRatio:(NSNumber *)adMediaAspectRatio {
+    
+    mediaAspectRatio = adMediaAspectRatio;
 }
 
 - (void)setDelayAdLoad:(NSNumber *)delayAdLoad
@@ -236,8 +241,17 @@ NSNumber *delay;
     GADNativeAdViewAdOptions *adViewOptions = [GADNativeAdViewAdOptions new];
     
     adViewOptions.preferredAdChoicesPosition = GADAdChoicesPositionTopRightCorner;
-    
-    
+
+    if (mediaAspectRatio isEqualToNumber:@0) {
+        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioAny;
+    } else if (mediaAspectRatio isEqualToNumber:@1) {
+        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioLandscape;
+    } else if (mediaAspectRatio isEqualToNumber:@2) {
+        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioPortrait;
+    } else if (mediaAspectRatio isEqualToNumber:@3) {
+        adViewOptions.mediaAspectRatio = GADNativeAdMediaAdLoaderOptions.GADMediaAspectRatioSquare;
+    }
+
     self.adLoader = [[GADAdLoader alloc]
                      initWithAdUnitID:adUnitId
                      rootViewController:rootViewController

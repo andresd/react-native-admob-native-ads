@@ -69,6 +69,13 @@ type NativeAd = {
   video: boolean;
 };
 
+type adMediaAspectRatioType = {
+    ANY: 0,
+    LANDSCAPE: 1,
+    PORTRAIT: 2,
+    SQUARE: 3,
+  }
+
 type NativeAdViewProps = {
   /**
    * When you are designing your ad, placeholders
@@ -104,6 +111,15 @@ type NativeAdViewProps = {
    */
 
   delayAdLoading?: number;
+
+  /**
+   * One of these options will cause only ads with media of the specified aspect ratio to be returned. 
+   * If this property is not set explicitly, no restrictions on aspect ratios will be applied.
+   * 
+   * import AdOptions then pass the value from there. AdOptions.adMediaAspectRatio
+   */
+
+  adMediaAspectRatio?: adMediaAspectRatioType;
 
   /**
    * Set testdevices for the ad.

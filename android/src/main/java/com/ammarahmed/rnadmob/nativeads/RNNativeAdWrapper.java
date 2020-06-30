@@ -36,6 +36,9 @@ public class RNNativeAdWrapper extends LinearLayout {
     Context mContext;
     UnifiedNativeAdView nativeAdView;
     UnifiedNativeAd unifiedNativeAd;
+
+     private int adMediaAspectRatio = 0;
+
     AdListener adListener = new AdListener() {
         @Override
         public void onAdFailedToLoad(int i) {
@@ -220,6 +223,7 @@ public class RNNativeAdWrapper extends LinearLayout {
                     NativeAdOptions adOptions = new NativeAdOptions.Builder()
                             .setVideoOptions(videoOptions)
                             .setAdChoicesPlacement(NativeAdOptions.ADCHOICES_TOP_RIGHT)
+                            .setPropAdMediaAspectRatio(adMediaAspectRatio)
                             .build();
                     builder.withNativeAdOptions(adOptions);
 
@@ -258,6 +262,10 @@ public class RNNativeAdWrapper extends LinearLayout {
 
     public void setAdRefreshInterval(int interval) {
         adRefreshInterval = interval;
+    }
+
+    public void setAdMediaAspectRatio(int aspectRatio) {
+        adMediaAspectRatio = aspectRatio;
     }
 
     public void setAdUnitId(String id) {

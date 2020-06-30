@@ -46,6 +46,7 @@ public class RNAdMobNativeViewManager extends ViewGroupManager<RNNativeAdWrapper
     public static final String PROP_PRICE_VIEW = "price";
     public static final String PROP_ICON_VIEW = "icon";
     public static final String PROP_STAR_RATING_VIEW = "starrating";
+    public static final String PROP_AD_MEDIA_ASPECT_RATIO = "adMediaAspectRatio";
 
     private RNNativeAdWrapper nativeAdView;
 
@@ -179,6 +180,12 @@ public class RNAdMobNativeViewManager extends ViewGroupManager<RNNativeAdWrapper
         if (view != null && nativeAdView.nativeAdView != null)
             nativeAdView.nativeAdView.setAdvertiserView(view);
 
+    }
+
+    @ReactProp(name = PROP_AD_MEDIA_ASPECT_RATIO)
+    public void setPropAdMediaAspectRatio(final RNNativeAdWrapper view, final int aspectRatio) {
+
+        nativeAdView.setMediaAspectRatio(aspectRatio);
     }
 
     @ReactProp(name = PROP_CALL_TO_ACTION_VIEW)
